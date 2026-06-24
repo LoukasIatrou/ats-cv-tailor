@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CV Live Preview</title>
+  <style>
+    html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; background: #1e1e1e; }
+    #status { position: fixed; top: 0; left: 0; right: 0; padding: 6px 12px; font-size: 13px; color: #fff; z-index: 10; }
+    #status.ok { background: #1b5e20; }
+    #status.error { background: #7f1d1d; }
+    #status.pending { background: #444; }
+    #pdf { position: absolute; top: 28px; left: 0; right: 0; bottom: 0; width: 100%; height: calc(100% - 28px); border: none; }
+    #log { position: fixed; top: 28px; left: 0; right: 0; bottom: 0; background: #111; color: #f88; padding: 16px; font-family: monospace; font-size: 12px; white-space: pre-wrap; overflow: auto; display: none; }
+  </style>
+</head>
+<body>
+  <div id="status" class="pending">Compiling…</div>
+  <iframe id="pdf" src="/preview.pdf"></iframe>
+  <pre id="log"></pre>
+
+  <script>
+    const statusEl = document.getElementById("status");
+    const pdfEl = document.getElementById("pdf");
+    const logEl = document.getElementById("log");
+
+    const events = new EventSource("/events");
+    events.onmessage = (e) => {
+      const { ok, log, version } = JSON.parse(e.data);
+      if (ok === null) {
+        statusEl.className = "pending";
+        statusEl.textContent = "Compiling…";
+        return;
+      }
+      if (ok) {
+        statusEl.className = "ok";
+        statusEl.textContent = "Compiled OK";
+        logEl.style.display = "none";
+        pdfEl.style.display = "block";
+        pdfEl.src = `/preview.pdf?v=${version}`;
+      } else {
+        statusEl.className = "error";
+        statusEl.textContent = "Compile failed — see log below";
+        logEl.style.display = "block";
+        logEl.textContent = log;
+      }
+    };
+  </script>
+</body>
+</html>

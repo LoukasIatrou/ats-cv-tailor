@@ -1,0 +1,21 @@
+{
+  "name": "ats-cv-tailor",
+  "version": "0.1.0",
+  "description": "Live LaTeX-to-PDF preview server for tailoring an ATS-friendly CV, paired with a Claude Code skill that tailors the CV content to a job role.",
+  "license": "MIT",
+  "private": true,
+  "type": "commonjs",
+  "bin": {
+    "cv-preview": "bin/preview.js"
+  },
+  "scripts": {
+    "preview": "node bin/preview.js"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
