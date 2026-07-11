@@ -15,20 +15,25 @@ Two pieces:
 
 ## Setup
 
-Requires Node.js 18+ and a LaTeX engine. [Tectonic](https://tectonic-typesetting.github.io/)
-is the default (self-contained, no separate TeX distribution needed):
+Requires Node.js 18+ and a LaTeX engine. The preview server auto-detects one on startup —
+[Tectonic](https://tectonic-typesetting.github.io/), `pdflatex`, or `latexmk`, in that order —
+so if you already have any of them installed (e.g. via TeX Live or MiKTeX), you're set:
+
+```bash
+npm install
+```
+
+If none are found, install Tectonic (self-contained, no separate TeX distribution needed):
 
 ```bash
 # install tectonic, e.g.:
 #   winget install tectonic-typesetting.tectonic   (Windows)
 #   brew install tectonic                           (macOS)
 #   cargo install tectonic                          (any platform with Rust)
-
-npm install
 ```
 
-If you'd rather use an existing TeX Live/MiKTeX install, set `LATEX_ENGINE=pdflatex`
-(or `latexmk`) as an environment variable before running the preview server.
+To force a specific engine regardless of what's detected, set `LATEX_ENGINE=pdflatex`
+(or `tectonic`/`latexmk`) as an environment variable before running the preview server.
 
 ## Live preview
 

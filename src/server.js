@@ -1,18 +1,36 @@
 const path = require("path");
 const fs = require("fs");
-const { spawn } = require("child_process");
+const { spawn, spawnSync } = require("child_process");
 const express = require("express");
 const chokidar = require("chokidar");
 
-const ENGINE = process.env.LATEX_ENGINE || "tectonic";
+const CANDIDATE_ENGINES = ["tectonic", "pdflatex", "latexmk"];
 
-function compile(texPath, outDir, onDone) {
+function isAvailable(engine) {
+  const result = spawnSync(engine, ["--version"], { stdio: "ignore" });
+  return !result.error;
+}
+
+function detectEngine() {
+  if (process.env.LATEX_ENGINE) return process.env.LATEX_ENGINE;
+  const found = CANDIDATE_ENGINES.find(isAvailable);
+  if (!found) {
+    throw new Error(
+      `No LaTeX engine found (checked: ${CANDIDATE_ENGINES.join(", ")}). ` +
+        `Install Tectonic (https://tectonic-typesetting.github.io/) or a TeX ` +
+        `distribution (MiKTeX/TeX Live), or set LATEX_ENGINE to point at one.`
+    );
+  }
+  return found;
+}
+
+function compile(engine, texPath, outDir, onDone) {
   const args =
-    ENGINE === "tectonic"
+    engine === "tectonic"
       ? [texPath, "--outdir", outDir, "--keep-logs"]
       : [texPath, `-output-directory=${outDir}`, "-interaction=nonstopmode", "-halt-on-error"];
 
-  const proc = spawn(ENGINE, args, { cwd: path.dirname(texPath) });
+  const proc = spawn(engine, args, { cwd: path.dirname(texPath) });
   let log = "";
   let done = false;
   const finish = (result) => {
@@ -23,7 +41,7 @@ function compile(texPath, outDir, onDone) {
   proc.stdout.on("data", (d) => (log += d));
   proc.stderr.on("data", (d) => (log += d));
   proc.on("error", (err) => {
-    finish({ ok: false, log: `Could not run "${ENGINE}": ${err.message}` });
+    finish({ ok: false, log: `Could not run "${engine}": ${err.message}` });
   });
   proc.on("close", (code) => {
     finish({ ok: code === 0, log });
@@ -35,6 +53,8 @@ function startServer(texPath, port) {
   if (!fs.existsSync(absTex)) {
     throw new Error(`No such file: ${absTex}`);
   }
+
+  const ENGINE = detectEngine();
 
   const outDir = path.join(path.dirname(absTex), ".build");
   fs.mkdirSync(outDir, { recursive: true });
@@ -54,7 +74,7 @@ function startServer(texPath, port) {
   }
 
   function runCompile() {
-    compile(absTex, outDir, (result) => {
+    compile(ENGINE, absTex, outDir, (result) => {
       lastStatus = { ...result, version: lastStatus.version + 1 };
       broadcast();
     });
