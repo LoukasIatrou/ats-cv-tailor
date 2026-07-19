@@ -102,7 +102,7 @@ function startServer(texPath, port) {
   });
 
   const watchDir = path.dirname(absTex);
-  chokidar
+  const watcher = chokidar
     .watch(watchDir, {
       depth: 1,
       ignored: /\.build|node_modules|\.git/,
@@ -120,7 +120,9 @@ function startServer(texPath, port) {
     console.log(`Engine: ${ENGINE} (set LATEX_ENGINE=pdflatex to switch)`);
   });
 
+  server.on("close", () => watcher.close());
+
   return server;
 }
 
-module.exports = { startServer };
+module.exports = { startServer, detectEngine, compile, isAvailable, CANDIDATE_ENGINES };

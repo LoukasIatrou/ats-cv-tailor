@@ -9,7 +9,10 @@
     "cv-preview": "bin/preview.js"
   },
   "scripts": {
-    "preview": "node bin/preview.js"
+    "preview": "node bin/preview.js",
+    "doctor": "node bin/doctor.js",
+    "test": "node --test test/**/*.test.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "chokidar": "^3.6.0",
@@ -17,5 +20,9 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.5"
   }
 }

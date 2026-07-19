@@ -1,0 +1,34 @@
+Senior Backend Engineer — Platform Reliability
+Northwind Cloud (fictional company) — Remote (EU timezones)
+
+About the role
+
+Northwind Cloud's Platform Reliability team owns the services that keep our customers'
+payment and billing pipelines running. We're looking for a senior backend engineer who's
+comfortable owning a service end to end — design, on-call, and the incident response that
+comes with running distributed systems at scale.
+
+What you'll do
+
+- Design and operate distributed backend services in Go, with an emphasis on reliability
+  and observability.
+- Participate in an on-call rotation and lead incident response for production issues.
+- Improve service performance and latency under load (we care a lot about p99, not just
+  p50).
+- Run infrastructure on Kubernetes and Docker; work closely with our platform/SRE team.
+- Mentor other engineers on the team and help set technical direction.
+- Collaborate with the payments team on reconciliation and billing correctness.
+
+What we're looking for
+
+- 5+ years of backend engineering experience, with strong Go skills.
+- Hands-on experience with Kubernetes, Docker, and cloud infrastructure (AWS preferred).
+- Experience owning production services, including on-call and incident response.
+- A track record of improving system reliability and performance, not just building new
+  features.
+- Experience mentoring or leading other engineers.
+- Bonus: experience with payments, billing, or other financial infrastructure.
+- Bonus: contributions to open-source infrastructure or tooling projects.
+
+This is a fictional job posting created for this repository's example. It is not a real
+listing from a real company.
