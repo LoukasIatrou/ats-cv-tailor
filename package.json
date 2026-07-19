@@ -11,7 +11,7 @@
   "scripts": {
     "preview": "node bin/preview.js",
     "doctor": "node bin/doctor.js",
-    "test": "node --test test/**/*.test.js",
+    "test": "node --test",
     "lint": "eslint ."
   },
   "dependencies": {
