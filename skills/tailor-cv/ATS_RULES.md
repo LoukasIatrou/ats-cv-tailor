@@ -105,3 +105,20 @@ for tailoring — see Scope below).
     existing template already violates a structural rule (multi-column, tables, missing
     `fontenc`/`cmap`, etc.), surface it as a warning rather than silently restructuring
     the document.
+
+## Presentation
+
+Checked by `npm run check -- <cv.tex>` (repo root). Fix hits in lines you edited; report
+pre-existing hits in untouched lines instead of rewriting them.
+
+19. **No line spillage.** A bullet that wraps must end on a line at least 3/4 full — no
+    one- or two-word last lines. Fix by tightening the wording so it fits one line, or by
+    extending it with truthful detail already in the source CV. Never pad with filler,
+    and never change margins, fonts, or spacing (rule 18). Bullets that fit on one line,
+    headings, and summary paragraphs are exempt.
+20. **No AI slop.** Avoid the tells reviewers pattern-match as machine-written:
+    vocabulary (*spearheaded, leveraged, utilized, robust, seamless, passionate,
+    results-driven, cutting-edge, proven track record, ...*), patterns (*not just X, but Y*,
+    *in order to*, *responsible for*), and em dashes (`---`). Prefer plain verbs and the
+    candidate's own phrasing. A hit that is the job description's exact terminology
+    stays (rule 15 wins). En dashes in date ranges (`--`) are fine.
