@@ -35,7 +35,9 @@ so and ask for a valid file rather than guessing at intended content.
    fix in step 3. Apply rules 15–17: mirror the job's real terminology truthfully without
    verbatim copying or stuffing, reorder for relevance, trim rather than delete wholesale.
 6. **Re-check against the full ruleset** after editing, including page count (rule 5) and
-   date-format consistency (rule 11).
+   date-format consistency (rule 11). Then run `npm run check -- <cv.tex>` (rules 19–20:
+   line spillage and AI slop), fix hits in lines you edited, and re-run until clean.
+   Mention any leftovers (headings, JD terminology, untouched lines) in step 7.
 7. **Summarize the diff** for the user: what was reordered, reworded, trimmed, and which
    keywords were aligned — so they can sanity-check truthfulness before sending it anywhere.
    Also remind them of two things this skill can't fix: (a) application-form/screening
@@ -60,7 +62,7 @@ so and ask for a valid file rather than guessing at intended content.
 - Write edits in the user's own voice and register — avoid generic, buzzword-heavy
   phrasing ("results-driven team player synergizing cross-functional stakeholders").
   Vague, formulaic language is increasingly pattern-matched by human reviewers as
-  AI-generated and penalized independent of ATS parsing.
+  AI-generated and penalized independent of ATS parsing (see rule 20).
 - Don't chase a specific keyword "match rate" percentage (e.g. tools claiming an
   80% match-rate target) — these thresholds aren't backed by verifiable data. Optimize
   for truthful relevance, not a score.

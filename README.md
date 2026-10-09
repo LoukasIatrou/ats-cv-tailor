@@ -145,6 +145,7 @@ npm run preview -- path/to/your-cv.tex      # start the live preview
 PORT=5151 npm run preview -- path/to/cv.tex # use a different port
 LATEX_ENGINE=pdflatex npm run preview -- cv.tex  # force a specific engine
 npm run doctor                              # diagnose environment problems
+npm run check -- path/to/cv.tex             # flag wrapped bullets whose last line is <75% full and AI-slop phrasing
 ```
 
 Example Claude Code prompt (see [`examples/example-prompt.md`](examples/example-prompt.md)
@@ -217,6 +218,7 @@ without the skill at all.
 ```
 bin/preview.js          CLI entry point — starts the live preview server
 bin/doctor.js            npm run doctor — environment/dependency diagnostic
+bin/check.js             npm run check — line-spillage + AI-slop checker (logic in src/check.js)
 src/server.js            Express + chokidar server: compile, watch, SSE status
 public/index.html        Browser UI: PDF iframe + status bar + error log overlay
 skills/tailor-cv/

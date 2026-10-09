@@ -12,7 +12,8 @@
     "preview": "node bin/preview.js",
     "doctor": "node bin/doctor.js",
     "test": "node --test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check": "node bin/check.js"
   },
   "dependencies": {
     "chokidar": "^3.6.0",
