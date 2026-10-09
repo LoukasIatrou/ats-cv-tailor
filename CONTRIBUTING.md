@@ -39,7 +39,7 @@ locally — CI builds it too, but it's slow to iterate on there.
 - `test/` — `node:test` suite for `src/server.js`. No test framework dependency is added;
   keep using the built-in runner.
 - `Dockerfile` / `.dockerignore` — optional local-install shortcut (bundles Tectonic), not
-  a hosting/deployment config. See the README's "Deployment" section before changing it.
+  a hosting/deployment config. See the README's Docker note before changing it.
 
 ## Scope guidelines
 
